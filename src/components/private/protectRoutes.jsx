@@ -16,7 +16,7 @@ const homeForRole = (role) => HOME_BY_ROLE[role] || "/";
  * Route guard with role-based access control.
  *
  * The server's GET /auth/me is the single source of truth for "who am I?".
- * - Not authenticated  -> redirect to the shared /login page.
+ * - Not authenticated  -> redirect to the public landing page at `/`.
  * - Authenticated but role not in `allowedRoles` -> redirect to that role's home.
  *
  * @param {object}   props
@@ -66,7 +66,7 @@ export default function ProtectedRoutes({ elements, allowedRoles = [] }) {
     );
   }
 
-  // Not signed in -> the shared login page.
+  // Not signed in -> the public landing page (root route).
   if (!role) return <Navigate to="/" replace />;
 
   // Role-based access filter: signed in but the wrong account type.
